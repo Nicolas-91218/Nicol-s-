@@ -1,0 +1,85 @@
+DROP DATABASE IF EXIST empresa ;
+CREATE DATABASE empresa;
+USE empresa;
+
+
+CREATE TABLE provincias (
+    provincia_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_provincia VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE ciudades (
+    ciudad_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_ciudad VARCHAR(100) NOT NULL,
+    ubicacion_gps VARCHAR(255), -- Para la "ubicación" que pediste
+    provincia_id INT,
+    FOREIGN KEY (provincia_id) REFERENCES provincias(provincia_id)
+);
+  
+CREATE TABLE compras (
+    compra_id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT,
+    producto_id INT,
+    fecha_compra DATE,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id),
+    FOREIGN KEY (producto_id) REFERENCES productos(producto_id)
+);
+
+CREATE TABLE productos (
+    producto_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_producto VARCHAR(100) NOT NULL,
+    precio DECIMAL(10, 2)
+);
+
+
+CREATE TABLE clientes (
+    cliente_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100)NOT NULL
+    Dni VARCHAR (100)NOT NULL
+  ciudad_id INT,
+    FOREIGN KEY (ciudad_id) REFERENCES ciudadades (ciudad_id),
+compras_id int ,  FOREIGN KEY (compra_id) REFERENCES compras ( compra_id)
+);
+
+
+
+
+INSERT INTO provincias (nombre_provincia) VALUES 
+('Buenos Aires'), 
+('Córdoba'), 
+('Santa Fe'), 
+('Mendoza'), 
+('Neuquén');
+
+INSERT INTO ciudades (nombre_ciudad, ubicacion_gps, provincia_id) VALUES 
+('La Plata', '-34.921, -57.954', 1),
+('Villa Carlos Paz', '-31.424, -64.497', 2),
+('Rosario', '-32.946, -60.639', 3),
+('San Rafael', '-34.617, -68.330', 4),
+('San Martín de los Andes', '-40.159, -71.353', 5);
+
+INSERT INTO productos (nombre_producto, precio) VALUES 
+('Monitor 24"', 150000.00),
+('Teclado Mecánico', 45000.00),
+('Mouse Gamer', 25000.00),
+('Webcam HD', 35000.00),
+('Pad Mouse XL', 12000.00);
+
+INSERT INTO clientes (nombre, apellido, dni, ciudad_id) VALUES 
+('Juan', 'Pérez', '30123456', 1),
+('María', 'Gómez', '32987654', 2),
+('Carlos', 'López', '28456123', 3),
+('Ana', 'Martínez', '35789456', 4),
+('Lucas', 'Rodríguez', '40123789', 5);
+
+INSERT INTO compras (cliente_id, producto_id, fecha_compra) VALUES 
+(1, 1, '2024-03-01'),
+(2, 3, '2024-03-05'),
+(3, 2, '2024-03-10'),
+(4, 5, '2024-03-12'),
+(5, 4, '2024-03-15');
+
+
+
