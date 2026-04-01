@@ -1,0 +1,13 @@
+SELECT * FROM clientes;
+SELECT nombre_provincia FROM provincias;
+SELECT * FROM productos ORDER BY precio LIMIT 3;
+SELECT * FROM ciudades ORDER BY poblacion;
+SELECT * FROM provincias WHERE poblacion BETWEEN 100000 AND 1000000;
+SELECT * FROM clientes c JOIN ciudades ci ON c.id_ciudad = ci.id_ciudad;
+SELECT * FROM ciudades ci JOIN provincias p ON ci.id_provincia = p.id_provincia;
+SELECT SUM(stock) FROM productos;
+SELECT AVG(precio) FROM productos;
+SELECT COUNT(*) FROM clientes;
+SELECT * FROM ciudades ORDER BY poblacion IMIT 3;
+SELECT * FROM productos WHERE stock < 10;
+SELECT * FROM compras ORDER BY fecha_compra LIMIT 1;
