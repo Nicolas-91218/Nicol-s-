@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Países</title>
+
+     <link rel="stylesheet" href="api.css">
+
+</head>
+
+<body>
+
+    <h1>Buscador de Países</h1>
+
+    <input type="text" id="pais" placeholder="Escribe un país">
+
+    <button onclick="buscarPais()">Buscar</button>
+
+    <div id="resultado">
+        <p>Cargando...</p>
+    </div>
+
+</body>
+
+<script>
+
+    let URL = "https://restcountries.com/v3.1/name/";
+
+    async function buscarPais() {
+
+        let pais = document.getElementById("pais").value;
+
+        let respuesta = await fetch(URL + pais);
+
+        let datos = await respuesta.json();
+
+        let country = datos[0];
+
+        document.getElementById("resultado").innerHTML = `
+
+            <div class="tarjeta">
+
+                <h2>${country.name.common}</h2>
+
+                <img src="${country.flags.png}">
+
+            </div>
+
+        `;
+    }
+
+</script>
+
+</html>
